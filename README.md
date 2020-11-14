@@ -1,6 +1,6 @@
 # BinaryOption
 
-Improved upon https://github.com/gmondok/ChainlinkCallOptions/blob/main/chainlinkOptions.sol (ChainLink/ETH Option), this is a binary option contract that has predefined payout and premium by a specific expiry date.
+Improved upon https://github.com/gmondok/ChainlinkCallOptions/blob/main/chainlinkOptions.sol (ChainLink/ETH Option), this is a binary option contract that has predefined payout by a specific expiry date.
 
 Example:
 

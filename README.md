@@ -1,6 +1,6 @@
 # BinaryOption (AmericanOption)
 
-Improved upon https://github.com/gmondok/ChainlinkCallOptions/blob/main/chainlinkOptions.sol (ChainLink/ETH Option), this is a binary option contract that has predefined payout by a specific expiry date, for any currency as underlying, premium, and payout.
+Improved upon https://github.com/gmondok/ChainlinkCallOptions/blob/main/chainlinkOptions.sol (ChainLink/ETH Option), this is a binary option contract that has predefined payout by a specific expiry date, support pairs as long as an oracle exist, premium in ETH/LINK, and any ERC20 as payout.
 
 Example:
 

@@ -6,13 +6,14 @@ import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contr
 contract OptionOfOption {
     using SafeMath for uint;
     BinaryOptionInterface internal optionInterface;
-    uint ID;
     address payable contractAddr;
-    bool exercised_;
-    bool expiried_;
-    
+
     //Options stored in arrays of structs
     struct option {
+        uint UID;
+        bool ULexercised_; //underlying exercised
+        bool ULexpiried_; //underlying expired
+        
         uint premium; //Fee in contract token that option writer charges
         uint expiry; //Unix timestamp of expiration time
         uint amount; //Amount of tokens the option contract is for
@@ -29,19 +30,19 @@ contract OptionOfOption {
         optionInterface = BinaryOptionInterface(0x0AbF726D454deb375f23cDb516f972DaF9b72C4e);
     }
     
-    function updateStatus() internal {
-        exercised_ = optionInterface.IsExercised(ID);
-        expiried_ = optionInterface.IsExpiried(ID);
+    function updateStatus(uint ID) internal {
+        Opts[ID].ULexercised_ = optionInterface.IsExercised(Opts[ID].UID);
+        Opts[ID].ULexpiried_ = optionInterface.IsExpiried(Opts[ID].UID);
     }
     
-    function writeLong(uint premium, uint expiry, uint tknAmt) public payable {
+    function writeLong(uint ULID, uint premium, uint expiry, uint tknAmt) public payable {
         require(msg.value == tknAmt, "Incorrect amount of ETH supplied"); 
-        Opts.push(option(premium, expiry, tknAmt, Opts.length, msg.sender, address(0), true, false, false));
+        Opts.push(option(ULID, false, false, premium, expiry, tknAmt, Opts.length, msg.sender, address(0), true, false, false));
     }
     
-    function writeShort(uint strike, uint premium, uint expiry, uint tknAmt) public payable {
+    function writeShort(uint ULID, uint strike, uint premium, uint expiry, uint tknAmt) public payable {
         require(msg.value == tknAmt, "Incorrect amount of ETH supplied"); 
-        Opts.push(option(premium, expiry, tknAmt, Opts.length, msg.sender, address(0), false, false, false));
+        Opts.push(option(ULID, false, false, premium, expiry, tknAmt, Opts.length, msg.sender, address(0), false, false, false));
     }
     
     function updatePremium(uint ID, uint premium) public payable {
@@ -86,7 +87,7 @@ contract OptionOfOption {
         require(!Opts[ID].exercised, "Option has already been exercised");
         require(Opts[ID].expiry > now, "Option is expired");
         //Conditions are met, proceed to payouts
-        updateStatus();
+        updateStatus(ID);
         if (Opts[ID].IsLong) {
             require(optionInterface.IsExercised(ID), "Long option with underlying not exercised");
         } else {

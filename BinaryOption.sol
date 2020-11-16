@@ -54,13 +54,13 @@ contract chainlinkOptions {
         Price = getPrice();
     }
     
-    //Allows user to write a covered call option
-    //Takes which token, a strike price(USD per token w/18 decimal places), premium(same unit as token), expiration time(unix) and how many tokens the contract is for
+    //Allows user to write a call option
     function writeCall(uint strike, uint premium, uint expiry, uint tknAmt) public payable {
         require(msg.value == tknAmt, "Incorrect amount of ETH supplied"); 
         Opts.push(option(strike, premium, expiry, tknAmt, Opts.length, msg.sender, address(0), true, false, false));
     }
     
+    //Allows user to write a put option
     function writePut(uint strike, uint premium, uint expiry, uint tknAmt) public payable {
         require(msg.value == tknAmt, "Incorrect amount of ETH supplied"); 
         Opts.push(option(strike, premium, expiry, tknAmt, Opts.length, msg.sender, address(0), false, false, false));
@@ -87,7 +87,7 @@ contract chainlinkOptions {
        Opts[ID].expiry = expiry;
     }
     
-    //Allows option writer to cancel and get their funds back from an unpurchased option
+    //Allows option writer to cancel and get their funds back from an unpurchased and unexercised option
     function cancelOption(uint ID) public payable {
         require(msg.sender == Opts[ID].writer, "You did not write this option");
         //Must not have already been canceled or bought
@@ -97,7 +97,7 @@ contract chainlinkOptions {
         
     }
     
-    //Purchase a call option, needs desired token, ID of option and payment
+    //Purchase a call/put option, ID of option and paying the repmium
     function buyOption(uint ID) public payable {
         require(!Opts[ID].canceled && Opts[ID].expiry > now, "Option is canceled/expired and cannot be bought");
         //Transfer premium payment from buyer
@@ -108,7 +108,7 @@ contract chainlinkOptions {
         
     }
     
-    //Exercise your call option, needs desired token, ID of option and payment
+    //Exercise your call option, provide ID of option given the price is gt than the strike price
     function exercise(uint ID) public payable {
         //If not expired and not already exercised, allow option owner to exercise
         //To exercise, the strike value*amount equivalent paid to writer (from buyer) and amount of tokens in the contract paid to buyer

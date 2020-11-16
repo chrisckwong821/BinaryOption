@@ -28,7 +28,7 @@ Given a predefined payout structure, Binary Option has a specific risk reward ra
 
 ![alt text](https://github.com/chrisckwong821/BinaryOption/blob/main/asset/gas.png?raw=true)
  
-Enhancement
+OptionOverOption
 ----------
 Given a binary option is purchased, OptionOverOption(OOO) can be offered to further shift some of the risk of the underlying binary options, by issuing:
 

@@ -4,7 +4,7 @@ A simplified variant of  [ChainLink/ETH Option](https://github.com/gmondok/Chain
 
 Example:
 
-CLASSIC
+Classic
 -------
 
 *Contract A:* Underlying : ETH, Strike : 600USD, Expiry (1609459199) - end of 2020, Amount : 10 ETH, Premium: 4 ETH

@@ -1,6 +1,6 @@
 pragma solidity ^0.6.7;
-
-import "https://github.com/chrisckwong821/BinaryOption/blob/main/BinaryOptionInterface.sol";
+import "./BinaryOptionInterface.sol";
+//import "https://github.com/chrisckwong821/BinaryOption/blob/main/BinaryOptionInterface.sol";
 import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/math/SafeMath.sol";
 
 contract OptionOfOption {
@@ -13,6 +13,7 @@ contract OptionOfOption {
         uint UID;
         bool ULexercised_; //underlying exercised
         bool ULexpiried_; //underlying expired
+        
         
         uint premium; //Fee in contract token that option writer charges
         uint amount; //Amount of tokens the option contract is for
@@ -36,11 +37,17 @@ contract OptionOfOption {
     
     function writeLong(uint ULID, uint premium, uint tknAmt) public payable {
         require(msg.value == tknAmt, "Incorrect amount of ETH supplied"); 
+        require(optionInterface.IsBought(ULID), "underlying option is not yet bought");
+        require(!optionInterface.IsExpiried(ULID), "underlying option expires");
+        require(!optionInterface.IsExercised(ULID), "underlying option is exercised");
         Opts.push(option(ULID, false, false, premium, tknAmt, Opts.length, msg.sender, address(0), true, false, false));
     }
     
     function writeShort(uint ULID, uint strike, uint premium, uint tknAmt) public payable {
         require(msg.value == tknAmt, "Incorrect amount of ETH supplied"); 
+        require(optionInterface.IsBought(ULID), "underlying option is not yet bought");
+        require(!optionInterface.IsExpiried(ULID), "underlying option expires");
+        require(!optionInterface.IsExercised(ULID), "underlying option is exercised");
         Opts.push(option(ULID, false, false, premium, tknAmt, Opts.length, msg.sender, address(0), false, false, false));
     }
     

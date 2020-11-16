@@ -1,6 +1,6 @@
 pragma solidity ^0.6.7;
 
-import "./BinaryOptionInterface.sol";
+import "https://github.com/chrisckwong821/BinaryOption/blob/main/BinaryOptionInterface.sol";
 import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/math/SafeMath.sol";
 
 contract OptionOfOption {

@@ -42,6 +42,10 @@ contract BinaryOptions is BinaryOptionInterface {
         return Opts[ID].exercised;
     }
     
+    function IsBought(uint ID) external view virtual override returns (bool) {
+        return Opts[ID].buyer == address(0);
+    }
+    
     //Returns the latest price
     function getPrice() public view returns (uint) {
         (

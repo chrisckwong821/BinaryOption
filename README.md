@@ -19,5 +19,5 @@ It means that at any point in time before the expiry, if the price of LINK/USD i
 
 ## Gas Cost
 
-!(https://github.com/chrisckwong821/BinaryOption/blob/main/asset/gas.png)
+![alt text](https://github.com/chrisckwong821/BinaryOption/blob/main/asset/gas.png?raw=true)
  

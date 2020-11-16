@@ -36,6 +36,9 @@ contract BinaryOptions {
     function IsExercised(uint ID) external view returns (bool) {
         return Opts[ID].exercised;
     }
+    function IsExpiried(uint ID) external view returns (bool) {
+        return now >= Opts[ID].expiry;
+    }
 
     //Returns the latest price
     function getPrice() public view returns (uint) {

@@ -3,7 +3,7 @@ pragma solidity ^0.6.7;
 import "https://github.com/smartcontractkit/chainlink/blob/master/evm-contracts/src/v0.6/interfaces/AggregatorV3Interface.sol";
 import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/math/SafeMath.sol";
 
-contract chainlinkOptions {
+contract BinaryOptions {
     //Overflow safe operators
     using SafeMath for uint;
     //Pricefeed interfaces

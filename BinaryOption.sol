@@ -32,6 +32,10 @@ contract BinaryOptions {
         Feed = AggregatorV3Interface(0x9326BFA02ADD2366b30bacB125260Af641031331);
         contractAddr = payable(address(this));
     }
+    
+    function IsExercised(uint ID) external view returns (bool) {
+        return Opts[ID].exercised;
+    }
 
     //Returns the latest price
     function getPrice() public view returns (uint) {

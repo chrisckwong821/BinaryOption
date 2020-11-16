@@ -15,7 +15,6 @@ contract OptionOfOption {
         bool ULexpiried_; //underlying expired
         
         uint premium; //Fee in contract token that option writer charges
-        uint expiry; //Unix timestamp of expiration time
         uint amount; //Amount of tokens the option contract is for
         uint id; //Unique ID of option, also array index
         address payable writer; //Issuer of option
@@ -35,14 +34,14 @@ contract OptionOfOption {
         Opts[ID].ULexpiried_ = optionInterface.IsExpiried(Opts[ID].UID);
     }
     
-    function writeLong(uint ULID, uint premium, uint expiry, uint tknAmt) public payable {
+    function writeLong(uint ULID, uint premium, uint tknAmt) public payable {
         require(msg.value == tknAmt, "Incorrect amount of ETH supplied"); 
-        Opts.push(option(ULID, false, false, premium, expiry, tknAmt, Opts.length, msg.sender, address(0), true, false, false));
+        Opts.push(option(ULID, false, false, premium, tknAmt, Opts.length, msg.sender, address(0), true, false, false));
     }
     
-    function writeShort(uint ULID, uint strike, uint premium, uint expiry, uint tknAmt) public payable {
+    function writeShort(uint ULID, uint strike, uint premium, uint tknAmt) public payable {
         require(msg.value == tknAmt, "Incorrect amount of ETH supplied"); 
-        Opts.push(option(ULID, false, false, premium, expiry, tknAmt, Opts.length, msg.sender, address(0), false, false, false));
+        Opts.push(option(ULID, false, false, premium, tknAmt, Opts.length, msg.sender, address(0), false, false, false));
     }
     
     function updatePremium(uint ID, uint premium) public payable {
@@ -50,13 +49,6 @@ contract OptionOfOption {
         //Must not have already been canceled or bought
         require(!Opts[ID].canceled && Opts[ID].buyer == address(0), "This option cannot be updated");
         Opts[ID].premium = premium;
-    }
-    
-    function updateExpiry(uint ID, uint expiry) public payable {
-        require(msg.sender == Opts[ID].writer, "You did not write this option");
-        //Must not have already been canceled or bought
-        require(!Opts[ID].canceled && Opts[ID].buyer == address(0), "This option cannot be updated");
-       Opts[ID].expiry = expiry;
     }
     
     //Allows option writer to cancel and get their funds back from an unpurchased option
@@ -69,9 +61,9 @@ contract OptionOfOption {
         
     }
     
-    //Purchase a call option, needs desired token, ID of option and payment
+    //Purchase a option, needs desired token, ID of option and payment
     function buyOption(uint ID) public payable {
-        require(!Opts[ID].canceled && Opts[ID].expiry > now, "Option is canceled/expired and cannot be bought");
+        require(!Opts[ID].canceled && !Opts[ID].ULexpiried_, "Option is canceled/ underlying has expired and cannot be bought");
         //Transfer premium payment from buyer
         require(msg.value == Opts[ID].premium, "Incorrect amount of ETH sent for premium");
         //Transfer premium payment to writer
@@ -85,7 +77,6 @@ contract OptionOfOption {
         //To exercise, the strike value*amount equivalent paid to writer (from buyer) and amount of tokens in the contract paid to buyer
         require(Opts[ID].buyer == msg.sender, "You do not own this option");
         require(!Opts[ID].exercised, "Option has already been exercised");
-        require(Opts[ID].expiry > now, "Option is expired");
         //Conditions are met, proceed to payouts
         updateStatus(ID);
         if (Opts[ID].IsLong) {

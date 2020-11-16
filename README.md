@@ -19,6 +19,11 @@ Exotic
 
 It means that at any point in time before the expiry, if the price of LINK/USD in the Oracle is equal or greater than 15, the contract buyer is eligible to exercise the option and claim 10ETH. If he does, he gets 10 ETH with a bet of 2 ETH -> 500% return.
 
+Benefit of BinaryOption
+-----------------------
+
+Given a predefined payout structure, Binary Option has a specific risk reward ratio as soon as the fixed amount of premium is paid. This makes trading and option exercise more intuitive and friendly to the end-user. With a cost-effective interface, premium/strike can also be adjusted on-chain with minimal cost.
+
 ## Gas Cost
 
 ![alt text](https://github.com/chrisckwong821/BinaryOption/blob/main/asset/gas.png?raw=true)

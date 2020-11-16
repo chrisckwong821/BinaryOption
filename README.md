@@ -17,5 +17,7 @@ It means that at any point in time before the expiry, if the price of ETH/USD in
 
 It means that at any point in time before the expiry, if the price of LINK/USD in the Oracle is equal or greater than 15, the contract buyer is eligible to exercise the option and claim 10ETH. If he does, he gets 10 ETH with a bet of 2 ETH -> 500% return.
 
-# Cost Analysis
+## Gas Cost
+
+!(https://github.com/chrisckwong821@gmail.com/BinaryOption/blob/master/asset/gas.png?raw=true)
  

@@ -23,3 +23,14 @@ It means that at any point in time before the expiry, if the price of LINK/USD i
 
 ![alt text](https://github.com/chrisckwong821/BinaryOption/blob/main/asset/gas.png?raw=true)
  
+Enhancement
+----------
+Given a binary option is purchased, OptionOverOption(OOO) can be offered to further shift some of the risk of the underlying binary options, by issuing:
+
+*LONG OOO* : which pays out only when underlying Binary Option expires EXERCISED(expired In-the-money)
+
+*SHORT OOO* : which pays out only when underlying Binary Option expires UNEXERCISED (expired Out-of-the-money)
+
+Noted that the OOO issuer can be anyone other than the buyer of the underlying binary option. However you would not be able to exercise the underlying Binary Option even when it is In-the-money if you issue OOO without being the buyer of its underlying. 
+
+While any rational participants would exercise the option to collect payout whenever possible, they may be incentizived to keep the contract unexercised if they take an even larger position of second-order derivative (eg: this type of OOO), betting on the SHORT side of the Binary Option.

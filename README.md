@@ -32,7 +32,7 @@ OptionOverOption
 ----------
 Given a binary option is purchased, OptionOverOption(OOO) can be offered to further shift some of the risk of the underlying binary options, by issuing:
 
-*LONG OOO* : which pays out only when underlying Binary Option expires EXERCISED(expired In-the-money)
+*LONG OOO* : which pays out only when underlying Binary Option is EXERCISED(expired In-the-money)
 
 *SHORT OOO* : which pays out only when underlying Binary Option expires UNEXERCISED (expired Out-of-the-money)
 

@@ -2,8 +2,7 @@ pragma solidity ^0.6.7;
 
 import "https://github.com/smartcontractkit/chainlink/blob/master/evm-contracts/src/v0.6/interfaces/AggregatorV3Interface.sol";
 import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/math/SafeMath.sol";
-//import "./BinaryOptionInterface.sol";
-import "https://github.com/chrisckwong821/BinaryOption/blob/main/BinaryOptionInterface.sol
+import "https://github.com/chrisckwong821/BinaryOption/blob/main/BinaryOptionInterface.sol";
 
 contract BinaryOptions is BinaryOptionInterface {
     //Overflow safe operators

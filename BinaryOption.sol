@@ -40,7 +40,7 @@ contract BinaryOptions is BinaryOptionInterface {
     }
     
     function IsExpiried(uint ID) external view virtual override returns (bool) {
-        return Opts[ID].exercised;
+        return Opts[ID].expiry < now;
     }
     
     function IsBought(uint ID) external view virtual override returns (bool) {

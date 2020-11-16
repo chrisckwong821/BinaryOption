@@ -16,3 +16,6 @@ It means that at any point in time before the expiry, if the price of ETH/USD in
 *Contract B:* Underlying : LINK, Strike : 15USD, Expiry (1609459199) - end of 2020, Amount : 10 ETH, Premium: 2 ETH
 
 It means that at any point in time before the expiry, if the price of LINK/USD in the Oracle is equal or greater than 15, the contract buyer is eligible to exercise the option and claim 10ETH. If he does, he gets 10 ETH with a bet of 2 ETH -> 500% return.
+
+# Cost Analysis
+ 
